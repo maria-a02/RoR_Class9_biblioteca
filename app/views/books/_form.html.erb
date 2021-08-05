@@ -1,0 +1,42 @@
+<%= form_with(model: book, local: true) do |f| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <h1>El libro "<%= book.title %>" no se agregó por las siguientes razones:</h1>
+      <ul>
+      <% book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <strong><%= f.label :title, "Título" %></strong>
+    <%= f.text_field :title, placeholder: "Ingrese el título", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <strong><%= f.label :author, "Autor" %></strong>
+    <%= f.text_field :author, placeholder: "Ingrese el autor", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <strong><%= f.label :status, "Estado" %></strong><br>
+    <%= f.select :status, options_for_select(@statuses), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <strong><%= f.label :lending_date, "Fecha de préstamo" %></strong>
+    <%= f.date_field :lending_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <strong><%= f.label :return_date,"Fecha de devolución" %></strong>
+    <%= f.date_field :return_date, class: 'form-control' %>
+  </div>
+
+  <div class='actions'>
+    <%= submit_tag "Crear Libro", class: 'btn btn-success' %>
+    <%= link_to 'Ver Biblioteca', root_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
